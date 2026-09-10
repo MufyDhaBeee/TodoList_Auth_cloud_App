@@ -4,8 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:to_do_list_app_fire2/auth/auth_page.dart';
 import 'package:to_do_list_app_fire2/auth/main_page.dart';
 import 'package:to_do_list_app_fire2/firebase_options.dart';
+import 'package:to_do_list_app_fire2/screen/add_note_screen.dart';
+import 'package:to_do_list_app_fire2/screen/home.dart';
 import 'package:to_do_list_app_fire2/screen/login.dart';
 import 'package:to_do_list_app_fire2/screen/signUp.dart';
+import 'package:to_do_list_app_fire2/widgets/task_widgets.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'To-Do-List-App',
       debugShowCheckedModeBanner: false,
 
-      home: Main_page(),
+      home: Add_Screen(),
     );
   }
 }
