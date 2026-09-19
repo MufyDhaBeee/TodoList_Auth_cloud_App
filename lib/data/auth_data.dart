@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:to_do_list_app_fire2/data/firestore.dart';
 
 abstract class AuthenticationDatasource{
   Future<void> register(String email, String password, String PasswordConfirm);
@@ -21,7 +22,9 @@ class AuthenticationRemote extends AuthenticationDatasource{
       throw Exception("Passwords do not match");
     }
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.trim(), password: password.trim(), );
+        email: email.trim(), password: password.trim()).then((value) {
+          Firestore_Datasource().CreateUser(email);
+      });
 
 
     }

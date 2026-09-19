@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'To-Do-List-App',
       debugShowCheckedModeBanner: false,
 
-      home: Add_Screen(),
+      home: Main_page(),
     );
   }
 }
