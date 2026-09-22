@@ -65,7 +65,9 @@ class _Task_WidgetState extends State<Task_Widget> {
                           ),
                         ),
                         Checkbox(
+                          activeColor: custom_green,
                           value: isDone,
+
                           onChanged: (value) {
                             setState(() {
                               isDone = !isDone;

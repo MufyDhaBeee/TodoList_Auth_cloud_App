@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:to_do_list_app_fire2/const/colors.dart';
 import 'package:to_do_list_app_fire2/data/firestore.dart';
 import 'package:to_do_list_app_fire2/screen/add_note_screen.dart';
+import 'package:to_do_list_app_fire2/widgets/stream_note.dart';
 import 'package:to_do_list_app_fire2/widgets/task_widgets.dart';
 
 class Home_Screen extends StatefulWidget {
@@ -31,36 +32,34 @@ class _Home_ScreenState extends State<Home_Screen> {
         ),
       ),
 
-      body: SafeArea(
-        child: NotificationListener<UserScrollNotification>(
-          onNotification: (notification) {
-            if (notification.direction == ScrollDirection.forward) {
-              setState(() {
-                show = true;
-              });
-            }
-            if (notification.direction == ScrollDirection.reverse) {
-              setState(() {
-                show = true;
-              });
-            }
-            return true;
-          },
-          child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore_Datasource().stream(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: NotificationListener<UserScrollNotification>(
+            onNotification: (notification) {
+              if (notification.direction == ScrollDirection.forward) {
+                setState(() {
+                  show = true;
+                });
               }
-              final noteslist = Firestore_Datasource().getNotes(snapshot);
-              return ListView.builder(
-                itemCount: noteslist.length,
-                itemBuilder: (context, index) {
-                  final note = noteslist[index];
-                  return Task_Widget(note);
-                },
-              );
+              if (notification.direction == ScrollDirection.reverse) {
+                setState(() {
+                  show = true;
+                });
+              }
+              return true;
             },
+            child: Column(
+              children: [
+                Stream_note(false),
+                Text('Completed', style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey.shade500,
+                  fontWeight: FontWeight.bold,
+                ),),
+                Stream_note(true),
+              ],
+            ),
+
           ),
         ),
       ),
